@@ -23,7 +23,7 @@ public class DemoFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        System.out.printf("this is my filter url:%s", request.getRequestURI());
+        // System.out.printf("this is my filter url:%s", request.getRequestURI());
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
