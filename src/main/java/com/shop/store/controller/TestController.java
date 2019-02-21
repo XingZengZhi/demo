@@ -2,7 +2,6 @@ package com.shop.store.controller;
 
 import com.shop.store.entity.User;
 import com.shop.store.service.UserService;
-import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.domain.Page;
@@ -29,13 +28,12 @@ public class TestController {
     private UserService userService;
 
     @GetMapping("save_user")
-    public String saveUser() {
-        String password = "123456";
+    public String saveUser(User user) {
         // 密码加密
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        User u = new User("lsm", bCryptPasswordEncoder.encode(password), 1, "人间大炮");
-        userService.saveUser(u);
-        System.out.println(u.toString());
+        String newPassword = new BCryptPasswordEncoder().encode(user.getPassword());
+        user.setPassword(newPassword);
+        userService.saveUser(user);
+        System.out.println(user.toString());
         return "my home";
     }
 
