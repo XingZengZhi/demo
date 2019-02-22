@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * 类名:
- * 概要: 测试Controller
+ * 概要: 用户Controller
  *
  * @author xzz
  * @version 1.00 (2019年02月21日)
@@ -25,7 +25,7 @@ import java.util.List;
 
 @RestController
 @EnableAutoConfiguration
-public class TestController {
+public class UserController {
     @Autowired
     private UserService userService;
 
