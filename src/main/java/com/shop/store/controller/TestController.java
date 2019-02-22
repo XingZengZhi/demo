@@ -1,6 +1,7 @@
 package com.shop.store.controller;
 
 import com.shop.store.entity.User;
+import com.shop.store.exception.UserNotExistException;
 import com.shop.store.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -27,7 +29,7 @@ public class TestController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("save_user")
+    @PostMapping("save_user")
     public String saveUser(User user) {
         // 密码加密
         String newPassword = new BCryptPasswordEncoder().encode(user.getPassword());
