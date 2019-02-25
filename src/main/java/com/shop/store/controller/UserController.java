@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sun.security.util.Password;
 
 import java.util.List;
 
@@ -25,6 +23,7 @@ import java.util.List;
 
 @RestController
 @EnableAutoConfiguration
+@RequestMapping("user")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -58,5 +57,12 @@ public class UserController {
     public Page<User> findAllUserByPage(@PathVariable Integer pageStart,
                                         @PathVariable Integer pageEnd) {
         return userService.findAllUserByPage(pageStart, pageEnd);
+    }
+
+    @GetMapping("login")
+    public User login(User user) {
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
+        return null;
     }
 }
