@@ -6,9 +6,12 @@ import com.shop.store.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import sun.security.util.Password;
+import sun.text.normalizer.ICUBinary;
 
 import java.util.List;
 
@@ -60,9 +63,10 @@ public class UserController {
     }
 
     @GetMapping("login")
-    public User login(User user) {
+    public String login(User user) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(user.getUsername());
         System.out.println(user.getPassword());
-        return null;
+        return "login";
     }
 }
