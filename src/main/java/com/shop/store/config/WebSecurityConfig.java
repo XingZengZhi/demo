@@ -40,12 +40,6 @@ import java.io.PrintWriter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
-    // @Override
-    // protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    //     //注入userDetailsService，需要实现userDetailsService接口
-    //     auth.userDetailsService(customUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-    // }
-
     @Override
     // 配置不需要验证的路径
     public void configure(WebSecurity web) throws Exception {
@@ -65,12 +59,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 //         return o;
                 //     }
                 // })
-                .antMatchers("/page", "/user/login").permitAll()
-                .antMatchers("/perpage/**").hasRole("USER")
+                .antMatchers("/html/**", "/user/login").permitAll()
+                // .antMatchers("/perpage/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/user/login")
+                .loginPage("/html/page?pagename=html_login")
                 .defaultSuccessUrl("/html/page?pagename=html_index")
                 // .loginProcessingUrl("/user/login")
                 .usernameParameter("username")

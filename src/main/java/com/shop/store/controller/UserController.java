@@ -30,16 +30,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Resource
-    private CustomUserDetailsService customUserDetailsService;
-
     @PostMapping("save_user")
     public String saveUser(User user) {
         // 密码加密
         String newPassword = new BCryptPasswordEncoder().encode(user.getPassword());
         user.setPassword(newPassword);
         userService.saveUser(user);
-        System.out.println(user.toString());
         return "my home";
     }
 
