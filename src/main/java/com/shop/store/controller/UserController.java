@@ -1,19 +1,17 @@
 package com.shop.store.controller;
 
 import com.shop.store.entity.User;
-import com.shop.store.exception.UserNotExistException;
 import com.shop.store.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import sun.security.util.Password;
-import sun.text.normalizer.ICUBinary;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -32,6 +30,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Resource
+    private CustomUserDetailsService customUserDetailsService;
+
     @PostMapping("save_user")
     public String saveUser(User user) {
         // 密码加密
@@ -43,6 +44,7 @@ public class UserController {
     }
 
     @GetMapping("findAllUser")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<User> findAllUser() {
         return userService.findAllUser();
     }
@@ -64,11 +66,11 @@ public class UserController {
     }
 
     @GetMapping("login")
+    // @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String login(User user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(user.getUsername());
         System.out.println(user.getPassword());
-        UserDetails userDetails = userService.loadUserByUsername(user.getUsername());
-        return "login";
+        return "人间不值得";
     }
 }

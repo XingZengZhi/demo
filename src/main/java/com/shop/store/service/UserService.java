@@ -13,7 +13,7 @@ import java.util.List;
  * @author xzz
  * @version 1.00 (2019年02月21日)
  */
-public interface UserService extends UserDetailsService {
+public interface UserService {
     void saveUser(User user);
 
     /**

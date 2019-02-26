@@ -1,6 +1,6 @@
 package com.shop.store.service;
 
-import com.shop.store.entity.Role;
+import com.shop.store.entity.UserRole;
 
 import java.util.List;
 
@@ -11,6 +11,6 @@ import java.util.List;
  * @author xzz
  * @version 1.00 (2019年02月26日)
  */
-public interface RoleService {
-    Role findAllById(long id);
+public interface UserRoleService {
+    List<UserRole> findAllByUsername(String username);
 }

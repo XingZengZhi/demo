@@ -1,7 +1,5 @@
 package com.shop.store.config;
 
-import com.shop.store.component.MyAccessDeniedHandler;
-import com.shop.store.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;
@@ -9,13 +7,13 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
@@ -23,6 +21,7 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,30 +37,14 @@ import java.io.PrintWriter;
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-    @Autowired
-    private UserService userService;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
-
-    //根据一个url请求，获得访问它所需要的roles权限
-    @Autowired
-    FilterInvocationSecurityMetadataSource myFilterInvocationSecurityMetadataSource;
-
-    //接收一个用户的信息和访问一个url所需要的权限，判断该用户是否可以访问
-    @Autowired
-    AccessDecisionManager myAccessDecisionManager;
-
-    //403页面
-    @Autowired
-    MyAccessDeniedHandler myAccessDeniedHandler;
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //注入userDetailsService，需要实现userDetailsService接口
-        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-    }
+    // @Override
+    // protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    //     //注入userDetailsService，需要实现userDetailsService接口
+    //     auth.userDetailsService(customUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+    // }
 
     @Override
     // 配置不需要验证的路径
@@ -72,7 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     // 定义安全策略
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()       //配置安全策略
+        http.authorizeRequests()
+                //配置安全策略
                 // .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                 //     @Override
                 //     public <O extends FilterSecurityInterceptor> O postProcess(O o) {
@@ -81,17 +65,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 //         return o;
                 //     }
                 // })
-                .antMatchers("/html/page?pagename=html_login",
-                        "/html/page?pagename=html_index",
-                        "/html/page?pagename=html_about",
-                        "/html/page?pagename=html_buytoday",
-                        "/html/page?pagename=html_commodity",
-                        "/html/page?pagename=html_details",
-                        "/html/page?pagename=html_infomation").permitAll()
+                .antMatchers("/page", "/user/login").permitAll()
+                .antMatchers("/perpage/**").hasRole("USER")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/html/page?pagename=html_login")
-                .loginProcessingUrl("/user/login")
+                .loginPage("/user/login")
+                .defaultSuccessUrl("/html/page?pagename=html_index")
+                // .loginProcessingUrl("/user/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll()
@@ -134,7 +115,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .csrf()
                 .disable()
-                .exceptionHandling()
-                .accessDeniedHandler(myAccessDeniedHandler);
+                .exceptionHandling();
+                // .accessDeniedHandler(myAccessDeniedHandler);
     }
 }

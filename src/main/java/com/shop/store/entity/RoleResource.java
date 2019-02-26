@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 /**
  * 类名:
- * 概要: 界面资源类
+ * 概要: 角色-资源
  *
  * @author xzz
  * @version 1.00 (2019年02月25日)

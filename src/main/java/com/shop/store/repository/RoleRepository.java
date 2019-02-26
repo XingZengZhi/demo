@@ -20,4 +20,6 @@ public interface RoleRepository extends CrudRepository<Role, Long> {
     //根据resource的主键查找resource允许的所有权限
     @Query(value = "select r.* from role r, resource_role rr where rr.res_id = ?1 and rr.rid = r.id", nativeQuery = true)
     public List<Role> findRolesOfResource(long resourceId);
+
+    Role findAllById(long id);
 }
