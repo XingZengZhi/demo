@@ -2,6 +2,7 @@ package com.shop.store.service;
 
 import com.shop.store.entity.User;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * @author xzz
  * @version 1.00 (2019年02月21日)
  */
-public interface UserService {
+public interface UserService extends UserDetailsService {
     void saveUser(User user);
 
     /**

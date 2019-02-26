@@ -66,21 +66,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     // 配置不需要验证的路径
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/html/**", "/static/**");
+        web.ignoring().antMatchers("/static/**");
     }
 
     @Override
     // 定义安全策略
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()       //配置安全策略
-                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-                    @Override
-                    public <O extends FilterSecurityInterceptor> O postProcess(O o) {
-                        o.setSecurityMetadataSource(myFilterInvocationSecurityMetadataSource);
-                        o.setAccessDecisionManager(myAccessDecisionManager);
-                        return o;
-                    }
-                })
+                // .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+                //     @Override
+                //     public <O extends FilterSecurityInterceptor> O postProcess(O o) {
+                //         o.setSecurityMetadataSource(myFilterInvocationSecurityMetadataSource);
+                //         o.setAccessDecisionManager(myAccessDecisionManager);
+                //         return o;
+                //     }
+                // })
+                .antMatchers("/html/page?pagename=html_login",
+                        "/html/page?pagename=html_index",
+                        "/html/page?pagename=html_about",
+                        "/html/page?pagename=html_buytoday",
+                        "/html/page?pagename=html_commodity",
+                        "/html/page?pagename=html_details",
+                        "/html/page?pagename=html_infomation").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/html/page?pagename=html_login")
