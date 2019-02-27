@@ -1,10 +1,11 @@
+#基本页面路由配置
 storepage:
   pagemap:
-    index: "/store/html/page?pagename=html_index"
-    about: "/store/html/page?pagename=html_about"
-    buytoday: "/store/html/page?pagename=html_buytoday"
-    commodity: "/store/html/page?pagename=html_commodity"
-    details: "/store/html/page?pagename=html_details"
-    information: "/store/html/page?pagename=html_information"
-    login: "/store/html/page?pagename=html_login"
+    index: "/store/html/page/html_index"
+    about: "/store/html/page/html_about"
+    buytoday: "/store/html/page/html_buytoday"
+    commodity: "/store/html/page/html_commodity"
+    details: "/store/html/page/html_details"
+    information: "/store/html/page/html_information"
+    login: "/store/html/page/html_login"
     shopcart: "/store/perpage/shopcart/shopcart"
