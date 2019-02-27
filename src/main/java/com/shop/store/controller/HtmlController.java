@@ -1,8 +1,12 @@
 package com.shop.store.controller;
 
+import com.shop.store.yml.Storepage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 类名:
@@ -16,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @EnableAutoConfiguration
 @RequestMapping("html")
 public class HtmlController {
+    @Autowired
+    private Storepage storepage;
+
     @RequestMapping("page")
-    public String pageJump(String pagename){
+    public String pageJump(String pagename, Model m){
         String[] pageArray = pagename.split("_");
         String s = "";
         for (int i = 0, len = pageArray.length; i < len; i++) {
@@ -26,6 +33,7 @@ public class HtmlController {
                 s += "/";
             }
         }
+        m.addAttribute("pagemap", storepage.getPagemap());
         return s;
     }
 }

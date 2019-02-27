@@ -15,11 +15,11 @@
     <div class="site-nav w1200">
       <p class="sn-back-home">
         <i class="layui-icon layui-icon-home"></i>
-        <a href="/store/html/page?pagename=html_index">首页</a>
+        <a th:href="${pagemap['index']}">首页</a>
       </p>
       <div class="sn-quick-menu">
-        <div class="login"><a href="/store/html/page?pagename=html_login">登录</a></div>
-        <div class="sp-cart"><a href="/store/perpage/shopcart">购物车</a><span>2</span></div>
+        <div class="login"><a th:href="${pagemap['login']}">登录</a></div>
+        <div class="sp-cart"><a th:href="${pagemap['shopcart']}">购物车</a><span>2</span></div>
       </div>
     </div>
   </div>
@@ -53,10 +53,12 @@
       <div class="inner-cont0">
         <div class="inner-cont1 w1200">
           <div class="inner-cont2">
-            <a href="/store/html/page?pagename=html_commodity">所有商品</a>
-            <a href="/store/html/page?pagename=html_buytoday">今日团购</a>
-            <a href="/store/html/page?pagename=html_information"  class="active">母婴资讯</a>
-            <a href="/store/html/page?pagename=html_about">关于我们</a>
+            <div class="inner-cont2">
+              <a th:href="${pagemap['commodity']}">所有商品</a>
+              <a th:href="${pagemap['buytoday']}">今日团购</a>
+              <a th:href="${pagemap['information']}" class="active">母婴资讯</a>
+              <a th:href="${pagemap['about']}">关于我们</a>
+            </div>
           </div>
         </div>
       </div>

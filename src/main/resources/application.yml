@@ -1,5 +1,5 @@
-Storepage:
-  pageMap:
+storepage:
+  pagemap:
     index: "/store/html/page?pagename=html_index"
     about: "/store/html/page?pagename=html_about"
     buytoday: "/store/html/page?pagename=html_buytoday"

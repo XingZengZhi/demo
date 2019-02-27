@@ -63,6 +63,14 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
+		<!--支持读取自定义yml文件-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<version>2.1.0.RELEASE</version>
+		</dependency>
+
+
 		<!--程序重启-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
