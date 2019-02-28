@@ -1,6 +1,7 @@
 package com.shop.store.repository.page;
 
 import com.shop.store.entity.User;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  * 类名:

@@ -70,7 +70,6 @@
 			<version>2.1.0.RELEASE</version>
 		</dependency>
 
-
 		<!--程序重启-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -78,6 +77,14 @@
             <optional>true</optional>
 			<scope>true</scope>
         </dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

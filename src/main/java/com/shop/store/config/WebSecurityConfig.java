@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 //         return o;
                 //     }
                 // })
-                .antMatchers("/html/**", "/user/login").permitAll()
+                .antMatchers("/html/**", "/user/login", "/commodity/**").permitAll()
                 // .antMatchers("/perpage/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
