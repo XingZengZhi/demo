@@ -42,7 +42,7 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     public Commodity queryCommdityById(String id) {
-        return commodityRepository.queryEmployeeById(id);
+        return commodityRepository.queryById(id);
     }
 
     @Override

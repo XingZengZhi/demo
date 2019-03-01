@@ -2,33 +2,37 @@ package com.shop.store.entity;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * 类名:
  * 概要: 商品基础信息类
- *
+ * shards 默认分区数
+ * replicas 每个分区默认的备份数
+ * refreshInterval 刷新间隔
  * @author xzz
  * @version 1.00 (2019年02月27日)
  */
 @Document(indexName = "store", type = "commodity", shards = 1, replicas = 0, refreshInterval = "-1")
-public class Commodity {
+public class Commodity implements Serializable {
     @Id
     private String id;
-    @Field
+
     private String name;
-    @Field
+
     private String imgurl;
-    @Field
+
     private String cdate;
-    @Field
+
     private String mdate;
-    @Field
+
     private Integer cuser;
-    @Field
+
     private Integer muser;
-    @Field
+
     private String remake;
 
     public String getId() {
