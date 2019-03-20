@@ -1,8 +1,7 @@
 package com.shop.store.controller;
 
 import com.google.gson.Gson;
-import com.shop.store.entity.Commodity;
-import com.shop.store.repository.CommodityEsRepository;
+import com.shop.store.entity.Comdity;
 import com.shop.store.service.CommodityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 
 /**
  * 类名:
@@ -26,10 +23,8 @@ import javax.annotation.Resource;
 @EnableAutoConfiguration
 @RequestMapping("commodity")
 public class CommodityController {
-    @Autowired
-    private CommodityEsRepository commodityEsRepository;
 
-    @Resource
+    @Autowired
     private CommodityService commodityService;
 
     /**
@@ -37,9 +32,9 @@ public class CommodityController {
      * @return
      */
     @PostMapping("add")
-    public String add(Commodity commodity) {
+    public String add(Comdity comdity) {
         // commodityRepository.save(commodity);
-        commodityService.saveCommodity(commodity);
+        commodityService.saveCommodity(comdity);
         System.err.println("添加了一个商品");
         return "success";
     }
@@ -49,7 +44,7 @@ public class CommodityController {
      * @return
      */
     @RequestMapping("delete")
-    public String delete(String id) {
+    public String delete(Long id) {
         // Commodity commodity = commodityRepository.queryEmployeeById(id);
         // commodityRepository.delete(commodity);
         commodityService.delCommodityById(id);
@@ -61,9 +56,9 @@ public class CommodityController {
      * @return
      */
     @RequestMapping("update")
-    public String update(Commodity commodity) {
+    public String update(Comdity comdity) {
         // commodityRepository.save(commodity);
-        commodityService.updCommodity(commodity);
+        commodityService.updCommodity(comdity);
         System.err.println("update a obj");
         return "success";
     }
@@ -72,13 +67,13 @@ public class CommodityController {
      * @return
      */
     @RequestMapping("query")
-    public String query(String id) {
+    public String query(Long id) {
         // Commodity commodity = commodityRepository.queryEmployeeById(id);
-        Commodity commodity = commodityService.queryCommdityById(id);
-        if(commodity == null) {
+        Comdity comdity = commodityService.queryCommdityById(id);
+        if(comdity == null) {
             return "不存在该用户";
         }
-        return new Gson().toJson(commodity);
+        return new Gson().toJson(comdity);
     }
 
     /**
@@ -87,7 +82,7 @@ public class CommodityController {
      */
     @RequestMapping("queryAll/{pageStart}/{pageEnd}")
     public String queryAll(@PathVariable Integer pageStart, @PathVariable Integer pageEnd) {
-        Page<Commodity> commodityPage = commodityService.findAllEmployeeByPage(pageStart, pageEnd);
+        Page<Comdity> commodityPage = commodityService.findAllEmployeeByPage(pageStart, pageEnd);
         if(commodityPage.isEmpty()) {
             return "不存在用户";
         }

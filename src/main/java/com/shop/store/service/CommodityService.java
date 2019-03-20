@@ -1,6 +1,6 @@
 package com.shop.store.service;
 
-import com.shop.store.entity.Commodity;
+import com.shop.store.entity.Comdity;
 import org.springframework.data.domain.Page;
 
 /**
@@ -13,13 +13,13 @@ import org.springframework.data.domain.Page;
  * @version 1.00 (2019年02月28日)
  */
 public interface CommodityService {
-    void saveCommodity(Commodity commodity);
+    void saveCommodity(Comdity comdity);
 
-    void delCommodityById(String id);
+    void delCommodityById(Long id);
 
-    void updCommodity(Commodity commodity);
+    void updCommodity(Comdity comdity);
 
-    Commodity queryCommdityById(String id);
+    Comdity queryCommdityById(Long id);
 
-    Page<Commodity> findAllEmployeeByPage(Integer pageStart, Integer pageEnd);
+    Page<Comdity> findAllEmployeeByPage(Integer pageStart, Integer pageEnd);
 }
