@@ -2,7 +2,7 @@ package com.shop.store.controller;
 
 import com.google.gson.Gson;
 import com.shop.store.entity.Commodity;
-import com.shop.store.repository.CommodityRepository;
+import com.shop.store.repository.CommodityEsRepository;
 import com.shop.store.service.CommodityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -27,7 +27,7 @@ import javax.annotation.Resource;
 @RequestMapping("commodity")
 public class CommodityController {
     @Autowired
-    private CommodityRepository commodityRepository;
+    private CommodityEsRepository commodityEsRepository;
 
     @Resource
     private CommodityService commodityService;
@@ -40,7 +40,7 @@ public class CommodityController {
     public String add(Commodity commodity) {
         // commodityRepository.save(commodity);
         commodityService.saveCommodity(commodity);
-        System.err.println("添加了一位用户");
+        System.err.println("添加了一个商品");
         return "success";
     }
 

@@ -1,6 +1,7 @@
 package com.shop.store.service.impl;
 
 import com.shop.store.entity.Commodity;
+import com.shop.store.repository.CommodityEsRepository;
 import com.shop.store.repository.CommodityRepository;
 import com.shop.store.repository.page.PageCommodityRepository;
 import com.shop.store.service.CommodityService;
@@ -20,6 +21,9 @@ import javax.annotation.Resource;
 @Service
 public class CommodityServiceImpl implements CommodityService {
     @Resource
+    private CommodityEsRepository commodityEsRepository;
+
+    @Resource
     private CommodityRepository commodityRepository;
 
     @Resource
@@ -27,22 +31,23 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     public void saveCommodity(Commodity commodity) {
+        commodityEsRepository.save(commodity);
         commodityRepository.save(commodity);
     }
 
     @Override
     public void delCommodityById(String id) {
-        commodityRepository.deleteById(id);
+        commodityEsRepository.deleteById(id);
     }
 
     @Override
     public void updCommodity(Commodity commodity) {
-        commodityRepository.save(commodity);
+        commodityEsRepository.save(commodity);
     }
 
     @Override
     public Commodity queryCommdityById(String id) {
-        return commodityRepository.queryById(id);
+        return commodityEsRepository.queryById(id);
     }
 
     @Override

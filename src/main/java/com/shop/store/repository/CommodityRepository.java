@@ -1,7 +1,7 @@
 package com.shop.store.repository;
 
 import com.shop.store.entity.Commodity;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,9 +9,8 @@ import org.springframework.stereotype.Component;
  * 概要:
  *
  * @author xzz
- * @version 1.00 (2019年02月27日)
+ * @version 1.00 (2019年03月20日)
  */
 @Component
-public interface CommodityRepository extends ElasticsearchRepository<Commodity, String> {
-    Commodity queryById(String id);
+public interface CommodityRepository extends CrudRepository<Commodity, String> {
 }
