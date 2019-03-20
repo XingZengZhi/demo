@@ -32,7 +32,7 @@ import java.io.PrintWriter;
  * 类名:
  * 概要:
  *
- * @author zbx
+ * @author xzz
  * @version 1.00 (2019年02月25日)
  */
 @Configuration
@@ -59,7 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 //         return o;
                 //     }
                 // })
-                .antMatchers("/html/**", "/user/login", "/commodity/**").permitAll()
+                .antMatchers("/**").permitAll()
+                // .antMatchers("/html/**", "/user/login", "/commodity/**").permitAll()
                 // .antMatchers("/perpage/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
