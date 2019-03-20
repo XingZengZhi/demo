@@ -1,12 +1,16 @@
 package com.shop.store.entity;
 
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * 类名:
- * 概要:
+ * 概要: 用户信息实体类
  *
  * @author xzz
  * @version 1.00 (2019年02月21日)

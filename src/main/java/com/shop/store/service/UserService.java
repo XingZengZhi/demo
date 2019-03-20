@@ -29,4 +29,6 @@ public interface UserService {
     List<User> findUserByUserName(String username);
 
     User findByUserId(Integer userid);
+
+    User findByUsernameAndPassword(String username, String password);
 }

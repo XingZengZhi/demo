@@ -9,9 +9,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -33,8 +33,9 @@ public class UserController {
     @PostMapping("save_user")
     public String saveUser(User user) {
         // 密码加密
-        String newPassword = new BCryptPasswordEncoder().encode(user.getPassword());
-        user.setPassword(newPassword);
+        // String newPassword = new BCryptPasswordEncoder().encode(user.getPassword());
+        String pwd = DigestUtils.md5DigestAsHex(user.getPassword().getBytes()).toUpperCase();
+        user.setPassword(pwd);
         userService.saveUser(user);
         return "my home";
     }
@@ -63,10 +64,9 @@ public class UserController {
 
     @GetMapping("login")
     // @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String login(User user) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
-        return "人间不值得";
+    public User login(User user) {
+        String pwd = DigestUtils.md5DigestAsHex(user.getPassword().getBytes()).toUpperCase();
+        User u = userService.findByUsernameAndPassword(user.getUsername(), pwd);
+        return u;
     }
 }
