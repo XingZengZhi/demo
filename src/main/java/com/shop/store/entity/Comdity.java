@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 @Table(name = "commodity")
 @Data
 @Document(indexName = "store", type = "commodity", shards = 1, replicas = 0, refreshInterval = "-1")
-public class Comdity {
+public class Comdity extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,5 +40,5 @@ public class Comdity {
 
     private Long sales;
 
-    private String remake;
+
 }

@@ -35,11 +35,15 @@ public class User implements Serializable {
     @Column(nullable = true)
     private String nickname;
 
-    public User(String user_name, String pass_word, Integer user_sex, String nick_name) {
+    @Column(nullable = true)
+    private String userimg;
+
+    public User(String user_name, String pass_word, Integer user_sex, String nick_name, String userimg) {
         this.username = user_name;
         this.password = pass_word;
         this.usersex = user_sex;
         this.nickname = nick_name;
+        this.userimg = userimg;
     }
 
     public User() {}
@@ -93,5 +97,13 @@ public class User implements Serializable {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getUserimg() {
+        return userimg;
+    }
+
+    public void setUserimg(String userimg) {
+        this.userimg = userimg;
     }
 }
