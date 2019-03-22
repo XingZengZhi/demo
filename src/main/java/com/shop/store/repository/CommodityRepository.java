@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
  * 类名:
  * 概要:
  *
- * @author xzz
  * @version 1.00 (2019年03月20日)
  */
 @Repository
