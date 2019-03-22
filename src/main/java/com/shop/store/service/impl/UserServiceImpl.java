@@ -4,6 +4,7 @@ import com.shop.store.entity.Role;
 import com.shop.store.entity.User;
 import com.shop.store.repository.UserRepository;
 import com.shop.store.repository.page.PageUserRepository;
+import com.shop.store.response.DataResponse;
 import com.shop.store.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -62,8 +64,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsernameAndPassword(String username, String password) {
-        return userRepository.findByUsernameAndPassword(username, password);
+    public DataResponse findByUsernameAndPassword(String username, String password) {
+        DataResponse<User> response = new DataResponse<>();
+        String md5_pwd = DigestUtils.md5DigestAsHex(password.getBytes()).toUpperCase();
+        User u = userRepository.findByUsernameAndPassword(username, md5_pwd);
+        if(u == null) {
+            response.setCode(404);
+            response.setMsg("用户不存在");
+        }
+        response.setData(u);
+        return response;
     }
 
 }

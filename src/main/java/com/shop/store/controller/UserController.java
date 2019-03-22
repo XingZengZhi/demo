@@ -1,6 +1,7 @@
 package com.shop.store.controller;
 
 import com.shop.store.entity.User;
+import com.shop.store.response.DataResponse;
 import com.shop.store.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -62,11 +63,9 @@ public class UserController {
         return userService.findAllUserByPage(pageStart, pageEnd);
     }
 
-    @GetMapping("login")
+    @PostMapping("login")
     // @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public User login(User user) {
-        String pwd = DigestUtils.md5DigestAsHex(user.getPassword().getBytes()).toUpperCase();
-        User u = userService.findByUsernameAndPassword(user.getUsername(), pwd);
-        return u;
+    public DataResponse login(User user) {
+        return userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
     }
 }

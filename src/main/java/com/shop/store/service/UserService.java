@@ -1,6 +1,7 @@
 package com.shop.store.service;
 
 import com.shop.store.entity.User;
+import com.shop.store.response.DataResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -30,5 +31,5 @@ public interface UserService {
 
     User findByUserId(Integer userid);
 
-    User findByUsernameAndPassword(String username, String password);
+    DataResponse findByUsernameAndPassword(String username, String password);
 }
